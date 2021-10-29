@@ -1,7 +1,7 @@
 import java.rmi.*;
 
 public interface HotelServerIntf extends Remote{
-    public String ping(String msg) throws RemoteException;
+    public String ping() throws RemoteException;
     public String bookRoom(String uuid, String userId) throws RemoteException; //return reservation id
     public String[] listAvailableRooms() throws RemoteException; //return list of rooms
     public boolean cancelReservation(String reservationId) throws RemoteException; //cancels booking

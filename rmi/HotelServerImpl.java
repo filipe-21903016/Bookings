@@ -6,7 +6,7 @@ public class HotelServerImpl extends UnicastRemoteObject implements HotelServerI
     public HotelServerImpl() throws RemoteException {
     }
 
-    public String ping(String msg) throws RemoteException{
+    public String ping() throws RemoteException{
         return "Pong!";
     }
   
