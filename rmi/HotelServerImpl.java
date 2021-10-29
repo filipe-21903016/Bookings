@@ -27,5 +27,9 @@ public class HotelServerImpl extends UnicastRemoteObject implements HotelServerI
         return false;
     }
 
+    public boolean loginUser(String email, String password){
+
+    }
+
 }
 
