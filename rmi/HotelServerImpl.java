@@ -5,6 +5,10 @@ public class HotelServerImpl extends UnicastRemoteObject implements HotelServerI
 
   public HotelServerImpl() throws RemoteException {
   }
+
+    public String ping(){
+        return "Pong!";
+    }
   
     //return reservation id
     public String bookRoom(String uuid, String userId){
@@ -28,7 +32,7 @@ public class HotelServerImpl extends UnicastRemoteObject implements HotelServerI
     }
 
     public boolean loginUser(String email, String password){
-
+        return false;
     }
 
 }
