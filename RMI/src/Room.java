@@ -1,12 +1,13 @@
 public class Room {
     private int id;
     private int floor;
-    private String bookingId;
+    private int capacity;
+    private static String fileHeader = "id,floor,capacity";
 
-    public Room(int id, int floor, String bookingId){
+    public Room(int id, int floor,int capacity){
         this.id = id;
         this.floor = floor;
-        this.bookingId = bookingId;
+        this.capacity = capacity;
     }
 
     public int getId()
@@ -19,13 +20,17 @@ public class Room {
         return this.floor;
     }
 
-    public String getBookingId()
+    public int getCapacity()
     {
-        return this.bookingId;
+        return this.capacity;
     }
 
-    public boolean isReserved()
-    {
-        return bookingId != null;
+    public static String getFileHeader() {
+        return fileHeader;
+    }
+
+    @Override
+    public String toString() {
+        return id + "," + floor + "," + capacity;
     }
 }

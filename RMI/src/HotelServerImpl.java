@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.rmi.*;
 import java.rmi.server.*;
 
@@ -11,9 +12,9 @@ public class HotelServerImpl extends UnicastRemoteObject implements HotelServerI
     }
   
     //return reservation id
-    public String bookRoom(String uuid, String userId) throws RemoteException{
-        
-        return null;
+    public String bookRoom(String checkInDate, String checkOutDate
+            , String clientEmail, int numberOfPeople, int roomId) throws RemoteException{
+        return Database.registerBooking(checkInDate,checkOutDate,clientEmail,numberOfPeople,roomId);
     }
 
     //return list of rooms
@@ -28,11 +29,12 @@ public class HotelServerImpl extends UnicastRemoteObject implements HotelServerI
     }
 
     public boolean registerUser(String email, String password) throws RemoteException{
-        return false;
+        return Database.registerClient(email,password);
     }
 
     public boolean loginUser(String email, String password) throws RemoteException{
-        return false;
+        Client client = Database.getClientByEmail(email);
+        return client.authenticate(password);
     }
 
 }

@@ -1,1 +1,4 @@
-*.class
+RMI/src/*.class
+RMI/.idea
+RMI/out/
+RMI/RMI.iml

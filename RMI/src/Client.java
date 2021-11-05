@@ -1,29 +1,26 @@
 import java.nio.charset.StandardCharsets;
 import java.security.*;
-import java.util.UUID;
+import java.util.Base64;
 
 public class Client{
-    private String id;
     private String email;
     private String password;
+    private static String fileHeader = "email,password";
 
-    public Client(String clientId, String email, String plainPassword){
+    public Client(String email, String hash){
         this.email = email;
-        this.password = hashPassword(plainPassword);
-        this.id = UUID.randomUUID().toString();
+        this.password = hash;
     };
 
-    private String hashPassword(String password)
+    public static String hashPassword(String password)
     {
-        SecureRandom random = new SecureRandom();
-        byte[] salt = new byte[16];
-        random.nextBytes(salt);
+        byte[] salt = "https://www.youtube.com/watch?v=dQw4w9WgXcQ".getBytes(StandardCharsets.UTF_8);
 
         try{
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            MessageDigest md = MessageDigest.getInstance("sha-256");
             md.update(salt);
             byte[] hashedPassword = md.digest(password.getBytes(StandardCharsets.UTF_8));
-            return new String(hashedPassword, StandardCharsets.UTF_8);
+            return Base64.getEncoder().encodeToString(hashedPassword);
         }catch(Exception exception)
         {
             System.out.println(exception);
@@ -31,18 +28,23 @@ public class Client{
         }
     }
 
-    public int getId()
-    {
-        return this.id;
-    }
-
     public String getEmail()
     {
         return this.email;
     }
 
-    public boolean isPassword(String plainPassword)
+    public boolean authenticate(String plainPassword)
     {
-        return this.password == hashPassword(plainPassword);
+        return this.password.equals(hashPassword(plainPassword));
+    }
+
+    public static String getFileHeader()
+    {
+        return fileHeader;
+    }
+
+    @Override
+    public String toString() {
+        return email + "," + password;
     }
 }

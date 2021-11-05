@@ -1,1 +1,1 @@
-id,checkInDate,checkOutDate,clientId
+id,checkInDate,checkOutDate,clientEmail,numberOfPeople,roomId
