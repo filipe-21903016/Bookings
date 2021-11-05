@@ -3,14 +3,14 @@ import java.security.*;
 import java.util.UUID;
 
 public class Client{
-    String clientId;
-    String email;
-    String password;
+    private String id;
+    private String email;
+    private String password;
 
     public Client(String clientId, String email, String plainPassword){
         this.email = email;
         this.password = hashPassword(plainPassword);
-        this.clientId = UUID.randomUUID().toString();
+        this.id = UUID.randomUUID().toString();
     };
 
     private String hashPassword(String password)
@@ -29,5 +29,20 @@ public class Client{
             System.out.println(exception);
             return null;
         }
+    }
+
+    public int getId()
+    {
+        return this.id;
+    }
+
+    public String getEmail()
+    {
+        return this.email;
+    }
+
+    public boolean isPassword(String plainPassword)
+    {
+        return this.password == hashPassword(plainPassword);
     }
 }
