@@ -7,8 +7,8 @@ public class HotelClient{
             String serverURL = "rmi://" + args[0] + "/HotelServer";
             HotelServerIntf HotelServerIntf = (HotelServerIntf)Naming.lookup(serverURL);
 
-            String res = HotelServerIntf.ping();
-            System.out.println(res);
+            String[] res = HotelServerIntf.listRooms();
+			res.forEach(System.out::println)
         }
         catch(Exception e){
             System.out.println("Exception:" + e);

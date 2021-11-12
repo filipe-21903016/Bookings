@@ -182,8 +182,9 @@ public class Database {
         bookings.values().forEach(System.out::println);
     }
 
-    public static void printRooms(){
-        rooms.values().forEach(System.out::println);
+    public static String[] printRooms(){
+        //rooms.values().forEach(System.out::println);
+		return (String[]) rooms.values();
     }
 
 }

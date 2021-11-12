@@ -19,7 +19,7 @@ public class HotelServerImpl extends UnicastRemoteObject implements HotelServerI
 
     //return list of rooms
     public String[] listAvailableRooms() throws RemoteException{
-        return null;
+        return Database.printRooms();
     }
     
     
