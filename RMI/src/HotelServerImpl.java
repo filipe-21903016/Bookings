@@ -24,7 +24,7 @@ public class HotelServerImpl extends UnicastRemoteObject implements HotelServerI
 
     public boolean cancelReservation(String reservationId) throws RemoteException
     {
-        return false;
+        return Database.cancelBooking(reservationId);
     }
 
     public boolean registerUser(String email, String password) throws RemoteException{
