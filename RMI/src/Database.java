@@ -33,7 +33,7 @@ public class Database {
         HashMap<String, Client> clients = new HashMap<>();
         try{
             String line;
-            BufferedReader br = new BufferedReader(new FileReader("saves/clients.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("../saves/clients.csv"));
             while ((line = br.readLine()) != null) {
                 if(!line.equals(Client.getFileHeader()))
                 {
@@ -54,7 +54,7 @@ public class Database {
         HashMap<Integer, Room> rooms = new HashMap<>();
         try{
             String line;
-            BufferedReader br = new BufferedReader(new FileReader("saves/rooms.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("../saves/rooms.csv"));
             while ((line = br.readLine()) != null) {
                 if(!line.equals(Room.getFileHeader()))
                 {
@@ -78,7 +78,7 @@ public class Database {
         HashMap<String, Booking> bookings = new HashMap<>();
         try{
             String line;
-            BufferedReader br = new BufferedReader(new FileReader("saves/bookings.csv"));
+            BufferedReader br = new BufferedReader(new FileReader("../saves/bookings.csv"));
             while ((line = br.readLine()) != null) {
                 if(!line.equals(Booking.getFileHeader()))
                 {
@@ -112,7 +112,7 @@ public class Database {
     public static boolean saveClients()
     {
        try{
-           FileWriter fileWriter = new FileWriter("saves/clients.csv");
+           FileWriter fileWriter = new FileWriter("../saves/clients.csv");
            fileWriter.write(Client.getFileHeader() + "\n");
            for (Client client: clients.values())
            {
@@ -128,7 +128,7 @@ public class Database {
     }
     public static boolean saveBookings(){
         try{
-            FileWriter fileWriter = new FileWriter("saves/bookings.csv");
+            FileWriter fileWriter = new FileWriter("../saves/bookings.csv");
             fileWriter.write(Booking.getFileHeader() + "\n");
             for (Booking booking: bookings.values())
             {
@@ -182,10 +182,15 @@ public class Database {
         bookings.values().forEach(System.out::println);
     }
 
-    public static String[] printRooms(){
-        //rooms.values().forEach(System.out::println);
-        rooms = importRooms();
-		return rooms.values().stream().map(Room::toString).toArray(String[]::new);
+    public static void printRooms(){
+        rooms.values().forEach(System.out::println);
     }
+
+    public static String[] listAvailableRooms()
+    {
+        return rooms.values().stream().map(Room::toString).toArray(String[]::new);
+    }
+
+
 
 }

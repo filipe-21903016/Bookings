@@ -8,6 +8,7 @@ public class HotelServer{
         try{
             HotelServerImpl HotelServerImpl = new HotelServerImpl();
             Naming.rebind("HotelServer", HotelServerImpl);
+            System.out.println(System.getProperty("user.dir"));
         }catch(Exception exception){
             System.out.println("Exception:" + exception);
         }
