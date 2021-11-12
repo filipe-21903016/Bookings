@@ -184,7 +184,7 @@ public class Database {
 
     public static String[] printRooms(){
         //rooms.values().forEach(System.out::println);
-		return (String[]) rooms.values();
+		return rooms.values().stream().map(Room::toString).toArray(String[]::new);
     }
 
 }
