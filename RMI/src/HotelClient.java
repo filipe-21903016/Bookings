@@ -7,9 +7,21 @@ public class HotelClient{
             String serverURL = "rmi://" + args[0] + "/HotelServer";
             HotelServerIntf HotelServerIntf = (HotelServerIntf)Naming.lookup(serverURL);
 
-            String[] res = HotelServerIntf.listAvailableRooms();
-			for (String room : res)
-                System.out.println(room);
+            
+            if (args[1].equals("list"))
+            {
+                String[] res = HotelServerIntf.listAvailableRooms();
+                for (String room : res)
+                    System.out.println(room);
+            }
+            else if (args[1].equals("book"))
+            {
+                System.out.println(HotelServerIntf.bookRoom(args[2], args[3], args[4], Integer.parseInt(args[5]), Integer.parseInt(args[6])));
+            }
+            else if (args[1].equals("cancel"))
+            {
+                HotelServerIntf.cancelReservation(args[2]);
+            }
         }
         catch(Exception e){
             System.out.println("Exception:" + e);

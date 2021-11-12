@@ -1,3 +1,4 @@
+import javax.xml.crypto.Data;
 import java.awt.print.Book;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -165,6 +166,8 @@ public class Database {
                 , clientEmail
                 , numberOfPeople
                 , roomId);
+        if (rooms.get(roomId).getCapacity() < numberOfPeople)
+            return null;
         bookings.put(booking.getId(),booking);
         saveBookings();
         return booking.getId();
@@ -175,6 +178,7 @@ public class Database {
         if (bookings.containsKey(reservationId))
         {
             bookings.remove(reservationId);
+            saveBookings();
             return true;
         }
         return false;
