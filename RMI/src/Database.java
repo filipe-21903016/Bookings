@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Database {
     private static HashMap<Integer, Room> rooms = importRooms();
@@ -168,6 +170,16 @@ public class Database {
         return booking.getId();
     }
 
+    public static boolean cancelBooking(String reservationId)
+    {
+        if (bookings.containsKey(reservationId))
+        {
+            bookings.remove(reservationId);
+            return true;
+        }
+        return false;
+    }
+
     public static Client getClientByEmail(String email)
     {
         return clients.get(email);
@@ -188,7 +200,9 @@ public class Database {
 
     public static String[] listAvailableRooms()
     {
-        return rooms.values().stream().map(Room::toString).toArray(String[]::new);
+        List<Integer> roomIds = rooms.values().stream().map(Room::getId).collect(Collectors.toList());
+        List<Integer> bookedRooms = bookings.values().stream().map(Booking::getRoomId).collect(Collectors.toList());
+        return (roomIds.stream().filter(id -> !bookedRooms.contains(id)).map(Object::toString).toArray(String[]::new));
     }
 
 
