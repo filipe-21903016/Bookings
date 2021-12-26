@@ -160,14 +160,14 @@ public class Database {
     public static String registerBooking(String checkInDate, String checkOutDate
             , String clientEmail, int numberOfPeople, int roomId)
     {
+        if (rooms.get(roomId).getCapacity() < numberOfPeople)
+            return null;
         Booking booking = new Booking(
                 LocalDate.parse(checkInDate, DateTimeFormatter.ofPattern("d/MM/yyyy"))
                 , LocalDate.parse(checkOutDate, DateTimeFormatter.ofPattern("d/MM/yyyy"))
                 , clientEmail
                 , numberOfPeople
                 , roomId);
-        if (rooms.get(roomId).getCapacity() < numberOfPeople)
-            return null;
         bookings.put(booking.getId(),booking);
         saveBookings();
         return booking.getId();
@@ -183,6 +183,18 @@ public class Database {
         }
         return false;
     }
+
+	public static String[] getBookingsByEmail(String email)
+	{
+		ArrayList<String> bookingIds = new ArrayList<>();
+
+		for (Booking booking: bookings.values())
+		{
+			if (booking.getClientEmail().equals(email))
+				bookingIds.add(booking.getId());
+		}
+		return bookingIds.stream().toArray(String[]::new);
+	}
 
     public static Client getClientByEmail(String email)
     {

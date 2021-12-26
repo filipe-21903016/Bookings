@@ -36,5 +36,9 @@ public class HotelServerImpl extends UnicastRemoteObject implements HotelServerI
         return client.authenticate(password);
     }
 
+	public String[] bookingsByUser(String email) throws RemoteException{
+		return Database.getBookingsByEmail(email);
+	};
+
 }
 

@@ -8,4 +8,5 @@ public interface HotelServerIntf extends Remote{
     public boolean cancelReservation(String reservationId) throws RemoteException; //cancels booking
     public boolean registerUser(String email, String password) throws RemoteException; //register user
     public boolean loginUser(String email, String password) throws RemoteException; //login user
+	public String[] bookingsByUser(String email) throws RemoteException;
 }

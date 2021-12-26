@@ -22,6 +22,10 @@ public class HotelClient{
             {
                 HotelServerIntf.cancelReservation(args[2]);
             }
+			else if (args[1].equals("check"))
+			{
+//				String[] res = HotelServerIntf
+			}
         }
         catch(Exception e){
             System.out.println("Exception:" + e);
