@@ -157,11 +157,31 @@ public class Database {
         return true;
     }
 
+
+	private static boolean roomIsFree(LocalDate in, LocalDate out, LocalDate in2, LocalDate out2)
+	{
+		return in.isAfter(out2) || out.isBefore(in2);
+	}
+
     public static String registerBooking(String checkInDate, String checkOutDate
             , String clientEmail, int numberOfPeople, int roomId)
     {
         if (rooms.get(roomId).getCapacity() < numberOfPeople)
             return null;
+
+        for (Booking booking: bookings.values())
+        {
+            if (booking.getRoomId() == roomId) {
+                LocalDate in = LocalDate.parse(checkInDate, DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                LocalDate out = LocalDate.parse(checkOutDate, DateTimeFormatter.ofPattern("d/MM/yyyy"));
+                LocalDate in2 = booking.getCheckInDate();
+                LocalDate out2 = booking.getCheckOutDate();
+				
+				if (!roomIsFree(in, out, in2, out2))
+					return null;
+            }
+        }
+
         Booking booking = new Booking(
                 LocalDate.parse(checkInDate, DateTimeFormatter.ofPattern("d/MM/yyyy"))
                 , LocalDate.parse(checkOutDate, DateTimeFormatter.ofPattern("d/MM/yyyy"))
@@ -214,13 +234,38 @@ public class Database {
         rooms.values().forEach(System.out::println);
     }
 
-    public static String[] listAvailableRooms()
+	public static String getReservationDetails(String id)
+	{
+		if (!bookings.containsKey(id))
+			return null;
+		Booking booking = bookings.get(id);
+		return booking.getCheckInDate() + ","
+			+ booking.getCheckOutDate() + ","
+			+ booking.getRoomId();
+	}
+
+    public static String[] listAvailableRooms(String checkInDate, String checkOutDate)
     {
+		List<Integer> occupiedRooms = new ArrayList<>();
+
+		for (Booking booking : bookings.values())
+		{
+			LocalDate in = LocalDate.parse(checkInDate, DateTimeFormatter.ofPattern("d/MM/yyyy"));
+			LocalDate out = LocalDate.parse(checkOutDate, DateTimeFormatter.ofPattern("d/MM/yyyy"));
+			LocalDate in2 = booking.getCheckInDate();
+			LocalDate out2 = booking.getCheckOutDate();
+			if (!roomIsFree(in, out, in2, out2))
+				occupiedRooms.add(booking.getRoomId());
+		}
         List<Integer> roomIds = rooms.values().stream().map(Room::getId).collect(Collectors.toList());
-        List<Integer> bookedRooms = bookings.values().stream().map(Booking::getRoomId).collect(Collectors.toList());
-        return (roomIds.stream().filter(id -> !bookedRooms.contains(id)).map(Object::toString).toArray(String[]::new));
+        return (roomIds.stream().filter(id -> !occupiedRooms.contains(id)).map(Object::toString).toArray(String[]::new));
     }
-
-
+	
+	public static String getFloorAndCapacity(int roomId)
+	{
+		int capacity = rooms.get(roomId).getCapacity();
+		int floor = rooms.get(roomId).getFloor();
+		return capacity + "," + floor;
+	}
 
 }

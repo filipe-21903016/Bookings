@@ -10,9 +10,9 @@ public class HotelClient{
             
             if (args[1].equals("list"))
             {
-                String[] res = HotelServerIntf.listAvailableRooms();
-                for (String room : res)
-                    System.out.println(room);
+                //String[] res = HotelServerIntf.listAvailableRooms();
+                //for (String room : res)
+                //    System.out.println(room);
             }
             else if (args[1].equals("book"))
             {

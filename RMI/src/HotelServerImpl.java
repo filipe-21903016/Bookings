@@ -18,8 +18,8 @@ public class HotelServerImpl extends UnicastRemoteObject implements HotelServerI
     }
 
     //return list of rooms
-    public String[] listAvailableRooms() throws RemoteException{
-        return Database.listAvailableRooms();
+    public String[] listAvailableRooms(String checkInDate, String checkOutDate) throws RemoteException{
+        return Database.listAvailableRooms(checkInDate, checkOutDate);
     }
 
     public boolean cancelReservation(String reservationId) throws RemoteException
@@ -38,7 +38,16 @@ public class HotelServerImpl extends UnicastRemoteObject implements HotelServerI
 
 	public String[] bookingsByUser(String email) throws RemoteException{
 		return Database.getBookingsByEmail(email);
-	};
+	}
+	
+	public String reservationDetails(String id) throws RemoteException
+	{
+		return Database.getReservationDetails(id);
+	}
 
+	public String getFloorAndCapacity(int roomId) throws RemoteException
+	{
+		return Database.getFloorAndCapacity(roomId);
+	}
 }
 
