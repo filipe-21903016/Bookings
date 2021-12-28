@@ -1,0 +1,17 @@
+<xs:schema xmlns:tns="http://hotel.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://hotel.com/" version="1.0">
+
+  <xs:element name="listRooms" type="tns:listRooms"/>
+
+  <xs:element name="listRoomsResponse" type="tns:listRoomsResponse"/>
+
+  <xs:complexType name="listRooms">
+    <xs:sequence/>
+  </xs:complexType>
+
+  <xs:complexType name="listRoomsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>

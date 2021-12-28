@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="HotelRestDetailsImplService" targetNamespace="http://hotel.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://hotel.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://hotel.com/" schemaLocation="hotelrestdetailsimpl_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="listRoomsResponse">
+    <wsdl:part name="parameters" element="tns:listRoomsResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="listRooms">
+    <wsdl:part name="parameters" element="tns:listRooms">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="HotelRestDetailsImpl">
+    <wsdl:operation name="listRooms">
+      <wsdl:input name="listRooms" message="tns:listRooms">
+    </wsdl:input>
+      <wsdl:output name="listRoomsResponse" message="tns:listRoomsResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HotelRestDetailsImplServiceSoapBinding" type="tns:HotelRestDetailsImpl">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="listRooms">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="listRooms">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="listRoomsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="HotelRestDetailsImplService">
+    <wsdl:port name="HotelRestDetailsImplPort" binding="tns:HotelRestDetailsImplServiceSoapBinding">
+      <soap:address location="http://localhost:8080/HotelREST/HotelRestDetailsImplPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
