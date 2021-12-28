@@ -1,0 +1,122 @@
+<xs:schema xmlns:tns="http://utility.hotel.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified" targetNamespace="http://utility.hotel.com/" version="1.0">
+
+  <xs:element name="bookRoom" type="tns:bookRoom"/>
+
+  <xs:element name="bookRoomResponse" type="tns:bookRoomResponse"/>
+
+  <xs:element name="bookingsByEmail" type="tns:bookingsByEmail"/>
+
+  <xs:element name="bookingsByEmailResponse" type="tns:bookingsByEmailResponse"/>
+
+  <xs:element name="cancelReservation" type="tns:cancelReservation"/>
+
+  <xs:element name="cancelReservationResponse" type="tns:cancelReservationResponse"/>
+
+  <xs:element name="getRoomFloorAndCapacity" type="tns:getRoomFloorAndCapacity"/>
+
+  <xs:element name="getRoomFloorAndCapacityResponse" type="tns:getRoomFloorAndCapacityResponse"/>
+
+  <xs:element name="listRooms" type="tns:listRooms"/>
+
+  <xs:element name="listRoomsResponse" type="tns:listRoomsResponse"/>
+
+  <xs:element name="loginUser" type="tns:loginUser"/>
+
+  <xs:element name="loginUserResponse" type="tns:loginUserResponse"/>
+
+  <xs:element name="registerUser" type="tns:registerUser"/>
+
+  <xs:element name="registerUserResponse" type="tns:registerUserResponse"/>
+
+  <xs:complexType name="listRooms">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="listRoomsResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registerUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="registerUserResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="bookRoom">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:int"/>
+      <xs:element name="arg4" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="bookRoomResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="bookingsByEmail">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="bookingsByEmailResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="loginUser">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="loginUserResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRoomFloorAndCapacity">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="getRoomFloorAndCapacityResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cancelReservation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="cancelReservationResponse">
+    <xs:sequence>
+      <xs:element name="return" type="xs:boolean"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
