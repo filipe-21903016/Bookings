@@ -149,28 +149,10 @@ public class HotelRestDetailsImpl implements HotelRestDetails {
 		}
 	}
 	
-	@POST
-	@Path("/pong")
-	public Message pong(Message msg)
-	{
-		System.out.println(msg.getFrom() + " : " + msg.getMessage());
-		return msg;
-	}
-	
-	
 	@GET
-	  @Path("/ping")
-	  public String ping()
-	  {
-		String response = null;
-		try {
-			HotelServerIntf server = RMIServer.getConnection();
-			response = server.ping();
-			return response;
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	  }
+	@Path("/ping")
+	public String ping() {
+		return "Pong!";
+	}
 	
 }
